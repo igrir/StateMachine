@@ -1,31 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class StateMachine {
+public class StateMachine <Entity> {
 
-	public IState EntityState;
+	private IState<Entity> m_CurrentState;
+	private IState<Entity> m_PreviousState;
+	private IState<Entity> m_GlobalState;
 
-	public MonoBehaviour Subject;
+	private Entity _Subject;
 
 	// constructor
-	public StateMachine (MonoBehaviour subject) {
-		this.Subject = Subject;
+	public StateMachine (Entity subject) {
+		this._Subject = subject;
 	}
 
-	void updateState() {
+	public void ChangeState(IState<Entity> newState) {
 		//handle input
-		IState newState = EntityState.handleInput(Subject);
 		if (newState != null) {
-			EntityState.exit(Subject);
-			EntityState = newState;
-			EntityState.enter(Subject);
+			m_PreviousState = m_CurrentState;
+
+			if (m_CurrentState != null) {
+				m_CurrentState.Exit(_Subject);
+			}
+
+			m_CurrentState = newState;
+			m_CurrentState.Enter(_Subject);
 		}
-		
-		EntityState.update(Subject);
+
 	}
 
-	public void UpdateMachine () {
-		updateState();
+	public void Update() {
+		if (m_GlobalState != null) {
+			m_GlobalState.Update(_Subject);
+		}
+		if (m_CurrentState != null) {
+			m_CurrentState.Update(_Subject);
+		}
 	}
 
 }

@@ -1,27 +1,23 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
-public class JumpState : IState {
+public class JumpState : IState<PlayerController> {
 	
-	public override void enter(MonoBehaviour subject) {
-		Debug.Log ("Enter jump");
-	}
-
-	public override void exit(MonoBehaviour subject) {
-		Debug.Log ("Exit jump");
+	public override void Enter(PlayerController subject) {
+		Debug.Log ("Enter Jump");
 	}
 	
-	public override IState handleInput(MonoBehaviour subject) {
-
-		//ganti state jadi jump
+	public override void Exit(PlayerController subject) {
+		Debug.Log ("Exit Jump");
+	}
+	
+	public override void Update(PlayerController subject) {
+		
 		if (Input.GetKeyDown(KeyCode.Space)) {
-			return PlayerStates.idleState;
+			//ganti state jadi idle
+			subject.playerStateMachine.ChangeState(PlayerStates.idleState);
 		}
-		//di jump tapi nggak bisa punch
 
-		return null;
 	}
-	
-	public override void update(MonoBehaviour subject) {
-	}
+
 }

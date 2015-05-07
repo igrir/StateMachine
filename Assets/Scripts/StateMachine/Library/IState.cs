@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class IState {
-	public abstract IState handleInput(MonoBehaviour subject);
-	public abstract void enter(MonoBehaviour subject);
-	public abstract void exit(MonoBehaviour subject);
-	public abstract void update(MonoBehaviour subject);
+public abstract class IState <Entity> {
+//	public abstract IState handleInput(Entity subject);
+	public abstract void Enter(Entity subject);
+	public abstract void Exit(Entity subject);
+	public abstract void Update(Entity subject);
 
 }

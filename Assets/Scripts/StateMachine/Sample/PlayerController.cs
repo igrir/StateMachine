@@ -5,14 +5,14 @@ public class PlayerController : MonoBehaviour {
 
 	public int Ammo = 100;
 
-	StateMachine playerStateMachine;
+	public StateMachine<PlayerController> playerStateMachine;
 
 	void Awake() {
 
-		playerStateMachine = new StateMachine(this);
+		playerStateMachine = new StateMachine<PlayerController>(this);
 
 		//initial state
-		playerStateMachine.EntityState = PlayerStates.idleState;
+		playerStateMachine.ChangeState(PlayerStates.idleState);
 	}
 
 	// Use this for initialization
@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
 
 	void Update () {
 		//call for state update
-		playerStateMachine.UpdateMachine();
+		playerStateMachine.Update();
 	}
 	
 }
