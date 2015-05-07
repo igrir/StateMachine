@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class IdleState : IEntityState {
+public class IdleState : IState {
 
-	public override void enter(Entity entity) {
+	public override void enter(MonoBehaviour subject) {
 		Debug.Log ("Enter Idle");
 	}
 
-	public override void exit(Entity entity) {
+	public override void exit(MonoBehaviour subject) {
 		Debug.Log ("Exit Idle");
 	}
 
-	public override IEntityState handleInput(Entity entity) {
+	public override IState handleInput(MonoBehaviour subject) {
 
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			//ganti state jadi jump
@@ -24,6 +24,6 @@ public class IdleState : IEntityState {
 		return null;
 	}
 	
-	public override void update(Entity entity) {
+	public override void update(MonoBehaviour subject) {
 	}
 }

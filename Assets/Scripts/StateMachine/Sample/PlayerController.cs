@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : Entity {
+public class PlayerController : MonoBehaviour {
 
 	public int Ammo = 100;
 
+	StateMachine playerStateMachine;
+
 	void Awake() {
+
+		playerStateMachine = new StateMachine(this);
+
 		//initial state
-		mEntityState = PlayerStates.idleState;
-		mEntityState.enter(this);
+		playerStateMachine.EntityState = PlayerStates.idleState;
 	}
 
 	// Use this for initialization
@@ -18,7 +22,7 @@ public class PlayerController : Entity {
 
 	void Update () {
 		//call for state update
-		base.Update();
+		playerStateMachine.UpdateMachine();
 	}
 	
 }

@@ -1,17 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class JumpState : IEntityState {
+public class JumpState : IState {
 	
-	public override void enter(Entity entity) {
+	public override void enter(MonoBehaviour subject) {
 		Debug.Log ("Enter jump");
 	}
 
-	public override void exit(Entity entity) {
+	public override void exit(MonoBehaviour subject) {
 		Debug.Log ("Exit jump");
 	}
 	
-	public override IEntityState handleInput(Entity entity) {
+	public override IState handleInput(MonoBehaviour subject) {
 
 		//ganti state jadi jump
 		if (Input.GetKeyDown(KeyCode.Space)) {
@@ -22,6 +22,6 @@ public class JumpState : IEntityState {
 		return null;
 	}
 	
-	public override void update(Entity entity) {
+	public override void update(MonoBehaviour subject) {
 	}
 }

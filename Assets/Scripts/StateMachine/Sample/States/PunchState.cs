@@ -1,20 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PunchState : IEntityState {
+public class PunchState : IState {
 
-	public override void enter(Entity entity) {
+	public override void enter(MonoBehaviour subject) {
 		Debug.Log ("Enter Punch");
-		//contoh manggil ammo.
-		((PlayerController)entity).Ammo--;
-		//contoh kegunaan yang lain: ganti animasi dari controller
 	}
 
-	public override void exit(Entity entity) {
+	public override void exit(MonoBehaviour subject) {
 		Debug.Log ("Exit Punch");
 	}
 
-	public override IEntityState handleInput(Entity entity) {
+	public override IState handleInput(MonoBehaviour subject) {
 
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			//ganti state jadi jump
@@ -28,6 +25,6 @@ public class PunchState : IEntityState {
 		return null;
 	}
 	
-	public override void update(Entity entity) {
+	public override void update(MonoBehaviour subject) {
 	}
 }
